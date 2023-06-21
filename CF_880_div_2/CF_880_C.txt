@@ -1,0 +1,66 @@
+//CF_880_C
+//math
+#include<bits/stdc++.h>
+using namespace std;
+//#define endl '\n'
+typedef long long ll;
+const int N=2e5+10;
+const ll INF=1e18;
+int Min[10]={0,1,10,100,1000,10000,100000,1000000};
+int Max[10]={0,9,99,999,9999,99999,999999,9999999};
+int get_dig(int x){
+
+    int ret=0;
+    while(x){
+
+        ret++;
+        x/=10;
+    }
+    return ret;
+}
+void solve(){
+
+  int a,b,c;
+  cin>>a>>b>>c;
+  ll s=0;
+  cin>>s;
+  vector<ll>bin;
+  bin.push_back(0);
+  vector<pair<int,int>>p;
+  ll tmp=0;
+  for(int i=Min[a];i<=Max[a];i++){
+
+    int L=max(Min[b],Min[c]-i),R=min(Max[b],Max[c]-i);
+    if(R<L)continue;
+    tmp+=R-L+1;
+    
+    p.push_back({i,L});
+    if(tmp>=s){
+
+        int A,B,C;
+        A=p.back().first;
+        B=p.back().second+(s- bin.back() - 1);
+        C=A+B;
+         cout<<A<<" + "<<B<<" = "<<C<<endl;
+        return;
+    }
+    bin.push_back(tmp);
+  }
+  
+
+    cout<<-1<<endl;
+    return;
+  
+ 
+
+}
+
+int main(){
+   
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--) solve();
+    return 0;
+}
